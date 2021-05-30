@@ -1,6 +1,6 @@
 {
   "name": "ssk2",
-  "homepage": "https://adambear1.github.io/ssk2/public/index.html",
+  "homepage": "https://adambear1.github.io/ssk2/",
   "version": "0.1.0",
   "dependencies": {
     "@testing-library/jest-dom": "^5.12.0",
