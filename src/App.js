@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense, lazy, useState, useEffect } from "react";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import "react-slideshow-image/dist/styles.css";
+import Loader from "./components/Loader";
+import { load_timer } from "./utils/timers";
+import "./utils/desktop-css.css"
+import "./utils/iphone5-css.css"
+import "./utils/iphone8-css.css"
+import "./utils/iphoneX-css.css"
+import "./utils/ipad-css.css"
+import "./utils/general-css.css"
+import "./utils/transition-css.css"
+
+
+
+const Home = lazy(() => import("./pages/Home"));
 
 function App() {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => setLoading(false), load_timer);
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Suspense fallback={<Loader />}>
+        <Switch>
+          {loading ? <Loader /> : <Route path="/" component={Home} />}
+        </Switch>
+      </Suspense>
+    </Router>
   );
 }
 
